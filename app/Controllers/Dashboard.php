@@ -4,9 +4,29 @@ use CodeIgniter\Controller;
  
 class Dashboard extends Controller
 {
+    
+    
     public function index()
     {
         $session = session();
-        echo "Welcome back, ".$session->get('user_name');
+        return view('admin/admin_layout');
+        
     }
+
+ 
+
+    public function contact()
+    {
+        $session = session();
+        return view('about/view_dashboard');
+        
+    }
+    
+    public function logout()
+    {
+        $session = session();
+        $session->destroy();
+        return redirect()->to('/login');
+    }
+
 }

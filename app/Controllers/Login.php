@@ -7,9 +7,14 @@ class Login extends Controller
 {
     public function index()
     {
+    $session = session();
+    if($session->get('logged_in')){
+        return redirect()->to('/dashboard');
+    }else{
         helper(['form']);
         echo view('login');
-    } 
+       }
+    }
  
     public function auth()
     {
@@ -40,10 +45,5 @@ class Login extends Controller
         }
     }
  
-    public function logout()
-    {
-        $session = session();
-        $session->destroy();
-        return redirect()->to('/login');
-    }
+    
 } 

@@ -7,7 +7,7 @@ class Register extends Controller
 {
     public function index()
     {
-        //include helper form
+        
         helper(['form']);
         $data = [];
         echo view('register', $data);
@@ -15,9 +15,9 @@ class Register extends Controller
  
     public function save()
     {
-        //include helper form
+        
         helper(['form']);
-        //set rules validation form
+        
         $rules = [
             'name'          => 'required|min_length[3]|max_length[20]',
             'email'         => 'required|min_length[6]|max_length[50]|valid_email|is_unique[users.user_email]',
@@ -33,7 +33,8 @@ class Register extends Controller
                 'user_password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
             ];
             $model->save($data);
-            return redirect()->to('/login');
+            echo '<script>alert("Silahkan login untuk melanjutkan");window.location.href="'.base_url('index.php/login').'";</script>';
+            
         }else{
             $data['validation'] = $this->validator;
             echo view('register', $data);
